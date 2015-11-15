@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7163405C1BF849C100D0CC4D /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7163405B1BF849C100D0CC4D /* Snow.sks */; };
+		716340621BF8527F00D0CC4D /* aircraft013.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 716340611BF8527F00D0CC4D /* aircraft013.mp3 */; };
+		716340641BF8613200D0CC4D /* aircraft036.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 716340631BF8613200D0CC4D /* aircraft036.mp3 */; };
+		7170ADBB1BF83EC400CC51CA /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7170ADB91BF83EC400CC51CA /* Explosion.sks */; };
+		7170ADBC1BF83EC400CC51CA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 7170ADBA1BF83EC400CC51CA /* spark.png */; };
 		71E44B7A1BF66E54000869CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B791BF66E54000869CA /* AppDelegate.swift */; };
 		71E44B7C1BF66E54000869CA /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 71E44B7B1BF66E54000869CA /* GameScene.sks */; };
 		71E44B7E1BF66E54000869CA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B7D1BF66E54000869CA /* GameScene.swift */; };
@@ -16,6 +21,8 @@
 		71E44B881BF66E54000869CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E44B861BF66E54000869CA /* LaunchScreen.storyboard */; };
 		71E44B931BF66E54000869CA /* SortItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B921BF66E54000869CA /* SortItTests.swift */; };
 		71E44B9E1BF66E54000869CA /* SortItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B9D1BF66E54000869CA /* SortItUITests.swift */; };
+		71E44BAC1BF690F9000869CA /* beep5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71E44BAB1BF690F9000869CA /* beep5.mp3 */; };
+		71E44BAE1BF6912E000869CA /* beep10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71E44BAD1BF6912E000869CA /* beep10.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7163405B1BF849C100D0CC4D /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
+		716340611BF8527F00D0CC4D /* aircraft013.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft013.mp3; sourceTree = "<group>"; };
+		716340631BF8613200D0CC4D /* aircraft036.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft036.mp3; sourceTree = "<group>"; };
+		7170ADB91BF83EC400CC51CA /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		7170ADBA1BF83EC400CC51CA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		71E44B761BF66E54000869CA /* SortIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E44B791BF66E54000869CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71E44B7B1BF66E54000869CA /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -51,6 +63,8 @@
 		71E44B991BF66E54000869CA /* SortItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SortItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E44B9D1BF66E54000869CA /* SortItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortItUITests.swift; sourceTree = "<group>"; };
 		71E44B9F1BF66E54000869CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71E44BAB1BF690F9000869CA /* beep5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep5.mp3; sourceTree = "<group>"; };
+		71E44BAD1BF6912E000869CA /* beep10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep10.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +92,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		716340541BF843DE00D0CC4D /* emitters */ = {
+			isa = PBXGroup;
+			children = (
+				716340561BF8444500D0CC4D /* snow */,
+				7170ADB81BF83EC400CC51CA /* space */,
+			);
+			name = emitters;
+			sourceTree = "<group>";
+		};
+		716340561BF8444500D0CC4D /* snow */ = {
+			isa = PBXGroup;
+			children = (
+				7163405B1BF849C100D0CC4D /* Snow.sks */,
+			);
+			name = snow;
+			sourceTree = "<group>";
+		};
+		7170ADB71BF83EA000CC51CA /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				716340541BF843DE00D0CC4D /* emitters */,
+			);
+			name = Assets;
+			path = SortIt;
+			sourceTree = "<group>";
+		};
+		7170ADB81BF83EC400CC51CA /* space */ = {
+			isa = PBXGroup;
+			children = (
+				7170ADB91BF83EC400CC51CA /* Explosion.sks */,
+				7170ADBA1BF83EC400CC51CA /* spark.png */,
+			);
+			path = space;
+			sourceTree = "<group>";
+		};
 		71E44B6D1BF66E54000869CA = {
 			isa = PBXGroup;
 			children = (
 				71E44B781BF66E54000869CA /* SortIt */,
+				7170ADB71BF83EA000CC51CA /* Assets */,
 				71E44B911BF66E54000869CA /* SortItTests */,
 				71E44B9C1BF66E54000869CA /* SortItUITests */,
 				71E44B771BF66E54000869CA /* Products */,
@@ -109,6 +159,10 @@
 				71E44B841BF66E54000869CA /* Assets.xcassets */,
 				71E44B861BF66E54000869CA /* LaunchScreen.storyboard */,
 				71E44B891BF66E54000869CA /* Info.plist */,
+				71E44BAB1BF690F9000869CA /* beep5.mp3 */,
+				71E44BAD1BF6912E000869CA /* beep10.mp3 */,
+				716340611BF8527F00D0CC4D /* aircraft013.mp3 */,
+				716340631BF8613200D0CC4D /* aircraft036.mp3 */,
 			);
 			path = SortIt;
 			sourceTree = "<group>";
@@ -199,6 +253,7 @@
 				TargetAttributes = {
 					71E44B751BF66E54000869CA = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = 7P9362E76E;
 					};
 					71E44B8D1BF66E54000869CA = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -238,7 +293,14 @@
 				71E44B7C1BF66E54000869CA /* GameScene.sks in Resources */,
 				71E44B881BF66E54000869CA /* LaunchScreen.storyboard in Resources */,
 				71E44B851BF66E54000869CA /* Assets.xcassets in Resources */,
+				71E44BAE1BF6912E000869CA /* beep10.mp3 in Resources */,
+				71E44BAC1BF690F9000869CA /* beep5.mp3 in Resources */,
+				7163405C1BF849C100D0CC4D /* Snow.sks in Resources */,
+				7170ADBC1BF83EC400CC51CA /* spark.png in Resources */,
+				7170ADBB1BF83EC400CC51CA /* Explosion.sks in Resources */,
+				716340641BF8613200D0CC4D /* aircraft036.mp3 in Resources */,
 				71E44B831BF66E54000869CA /* Main.storyboard in Resources */,
+				716340621BF8527F00D0CC4D /* aircraft013.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +469,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SortIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.garthmackenzie.SortIt;
@@ -418,6 +481,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SortIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.garthmackenzie.SortIt;
@@ -494,6 +558,7 @@
 				71E44BA41BF66E54000869CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71E44BA51BF66E54000869CA /* Build configuration list for PBXNativeTarget "SortItTests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +567,7 @@
 				71E44BA71BF66E54000869CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		71E44BA81BF66E54000869CA /* Build configuration list for PBXNativeTarget "SortItUITests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +576,7 @@
 				71E44BAA1BF66E54000869CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
