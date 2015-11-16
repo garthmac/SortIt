@@ -10,8 +10,17 @@
 		7163405C1BF849C100D0CC4D /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7163405B1BF849C100D0CC4D /* Snow.sks */; };
 		716340621BF8527F00D0CC4D /* aircraft013.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 716340611BF8527F00D0CC4D /* aircraft013.mp3 */; };
 		716340641BF8613200D0CC4D /* aircraft036.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 716340631BF8613200D0CC4D /* aircraft036.mp3 */; };
+		716340661BF9256F00D0CC4D /* 16.7 Million Particles on an iPad Pro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 716340651BF9256F00D0CC4D /* 16.7 Million Particles on an iPad Pro.mp3 */; };
+		716340681BF932F600D0CC4D /* ReplayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716340671BF932F600D0CC4D /* ReplayScene.swift */; };
+		7163406B1BF9849700D0CC4D /* Fireflies.sks in Resources */ = {isa = PBXBuildFile; fileRef = 716340691BF9849700D0CC4D /* Fireflies.sks */; };
+		7163406C1BF9849700D0CC4D /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 7163406A1BF9849700D0CC4D /* spark.png */; };
+		7163406E1BF9936900D0CC4D /* aircraft064.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7163406D1BF9936900D0CC4D /* aircraft064.mp3 */; };
+		716340721BF9A3C500D0CC4D /* GreenEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 716340711BF9A3C500D0CC4D /* GreenEmitter.sks */; };
+		716340741BF9AAC900D0CC4D /* RedEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 716340731BF9AAC900D0CC4D /* RedEmitter.sks */; };
+		716340781BF9B09000D0CC4D /* Magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = 716340771BF9B09000D0CC4D /* Magic.sks */; };
+		7163407A1BF9B0E600D0CC4D /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 716340791BF9B0E600D0CC4D /* Smoke.sks */; };
+		7163407C1BF9B11A00D0CC4D /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7163407B1BF9B11A00D0CC4D /* Fire.sks */; };
 		7170ADBB1BF83EC400CC51CA /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7170ADB91BF83EC400CC51CA /* Explosion.sks */; };
-		7170ADBC1BF83EC400CC51CA /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 7170ADBA1BF83EC400CC51CA /* spark.png */; };
 		71E44B7A1BF66E54000869CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B791BF66E54000869CA /* AppDelegate.swift */; };
 		71E44B7C1BF66E54000869CA /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 71E44B7B1BF66E54000869CA /* GameScene.sks */; };
 		71E44B7E1BF66E54000869CA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B7D1BF66E54000869CA /* GameScene.swift */; };
@@ -46,8 +55,17 @@
 		7163405B1BF849C100D0CC4D /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
 		716340611BF8527F00D0CC4D /* aircraft013.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft013.mp3; sourceTree = "<group>"; };
 		716340631BF8613200D0CC4D /* aircraft036.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft036.mp3; sourceTree = "<group>"; };
-		7170ADB91BF83EC400CC51CA /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
-		7170ADBA1BF83EC400CC51CA /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		716340651BF9256F00D0CC4D /* 16.7 Million Particles on an iPad Pro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "16.7 Million Particles on an iPad Pro.mp3"; sourceTree = "<group>"; };
+		716340671BF932F600D0CC4D /* ReplayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplayScene.swift; sourceTree = "<group>"; };
+		716340691BF9849700D0CC4D /* Fireflies.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fireflies.sks; sourceTree = "<group>"; };
+		7163406A1BF9849700D0CC4D /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		7163406D1BF9936900D0CC4D /* aircraft064.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft064.mp3; sourceTree = "<group>"; };
+		716340711BF9A3C500D0CC4D /* GreenEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GreenEmitter.sks; sourceTree = "<group>"; };
+		716340731BF9AAC900D0CC4D /* RedEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RedEmitter.sks; sourceTree = "<group>"; };
+		716340771BF9B09000D0CC4D /* Magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Magic.sks; sourceTree = "<group>"; };
+		716340791BF9B0E600D0CC4D /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
+		7163407B1BF9B11A00D0CC4D /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
+		7170ADB91BF83EC400CC51CA /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Explosion.sks; path = space/Explosion.sks; sourceTree = "<group>"; };
 		71E44B761BF66E54000869CA /* SortIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E44B791BF66E54000869CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71E44B7B1BF66E54000869CA /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -95,18 +113,17 @@
 		716340541BF843DE00D0CC4D /* emitters */ = {
 			isa = PBXGroup;
 			children = (
-				716340561BF8444500D0CC4D /* snow */,
-				7170ADB81BF83EC400CC51CA /* space */,
+				7170ADB91BF83EC400CC51CA /* Explosion.sks */,
+				7163407B1BF9B11A00D0CC4D /* Fire.sks */,
+				716340691BF9849700D0CC4D /* Fireflies.sks */,
+				716340711BF9A3C500D0CC4D /* GreenEmitter.sks */,
+				716340771BF9B09000D0CC4D /* Magic.sks */,
+				716340731BF9AAC900D0CC4D /* RedEmitter.sks */,
+				716340791BF9B0E600D0CC4D /* Smoke.sks */,
+				7163405B1BF849C100D0CC4D /* Snow.sks */,
+				7163406A1BF9849700D0CC4D /* spark.png */,
 			);
 			name = emitters;
-			sourceTree = "<group>";
-		};
-		716340561BF8444500D0CC4D /* snow */ = {
-			isa = PBXGroup;
-			children = (
-				7163405B1BF849C100D0CC4D /* Snow.sks */,
-			);
-			name = snow;
 			sourceTree = "<group>";
 		};
 		7170ADB71BF83EA000CC51CA /* Assets */ = {
@@ -116,15 +133,6 @@
 			);
 			name = Assets;
 			path = SortIt;
-			sourceTree = "<group>";
-		};
-		7170ADB81BF83EC400CC51CA /* space */ = {
-			isa = PBXGroup;
-			children = (
-				7170ADB91BF83EC400CC51CA /* Explosion.sks */,
-				7170ADBA1BF83EC400CC51CA /* spark.png */,
-			);
-			path = space;
 			sourceTree = "<group>";
 		};
 		71E44B6D1BF66E54000869CA = {
@@ -153,6 +161,7 @@
 			children = (
 				71E44B791BF66E54000869CA /* AppDelegate.swift */,
 				71E44B7B1BF66E54000869CA /* GameScene.sks */,
+				716340671BF932F600D0CC4D /* ReplayScene.swift */,
 				71E44B7D1BF66E54000869CA /* GameScene.swift */,
 				71E44B7F1BF66E54000869CA /* GameViewController.swift */,
 				71E44B811BF66E54000869CA /* Main.storyboard */,
@@ -163,6 +172,8 @@
 				71E44BAD1BF6912E000869CA /* beep10.mp3 */,
 				716340611BF8527F00D0CC4D /* aircraft013.mp3 */,
 				716340631BF8613200D0CC4D /* aircraft036.mp3 */,
+				7163406D1BF9936900D0CC4D /* aircraft064.mp3 */,
+				716340651BF9256F00D0CC4D /* 16.7 Million Particles on an iPad Pro.mp3 */,
 			);
 			path = SortIt;
 			sourceTree = "<group>";
@@ -292,15 +303,23 @@
 			files = (
 				71E44B7C1BF66E54000869CA /* GameScene.sks in Resources */,
 				71E44B881BF66E54000869CA /* LaunchScreen.storyboard in Resources */,
+				716340721BF9A3C500D0CC4D /* GreenEmitter.sks in Resources */,
 				71E44B851BF66E54000869CA /* Assets.xcassets in Resources */,
+				7163406C1BF9849700D0CC4D /* spark.png in Resources */,
 				71E44BAE1BF6912E000869CA /* beep10.mp3 in Resources */,
 				71E44BAC1BF690F9000869CA /* beep5.mp3 in Resources */,
+				7163406B1BF9849700D0CC4D /* Fireflies.sks in Resources */,
 				7163405C1BF849C100D0CC4D /* Snow.sks in Resources */,
-				7170ADBC1BF83EC400CC51CA /* spark.png in Resources */,
 				7170ADBB1BF83EC400CC51CA /* Explosion.sks in Resources */,
+				7163407C1BF9B11A00D0CC4D /* Fire.sks in Resources */,
 				716340641BF8613200D0CC4D /* aircraft036.mp3 in Resources */,
+				716340661BF9256F00D0CC4D /* 16.7 Million Particles on an iPad Pro.mp3 in Resources */,
+				716340781BF9B09000D0CC4D /* Magic.sks in Resources */,
 				71E44B831BF66E54000869CA /* Main.storyboard in Resources */,
 				716340621BF8527F00D0CC4D /* aircraft013.mp3 in Resources */,
+				7163406E1BF9936900D0CC4D /* aircraft064.mp3 in Resources */,
+				716340741BF9AAC900D0CC4D /* RedEmitter.sks in Resources */,
+				7163407A1BF9B0E600D0CC4D /* Smoke.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +347,7 @@
 				71E44B7E1BF66E54000869CA /* GameScene.swift in Sources */,
 				71E44B801BF66E54000869CA /* GameViewController.swift in Sources */,
 				71E44B7A1BF66E54000869CA /* AppDelegate.swift in Sources */,
+				716340681BF932F600D0CC4D /* ReplayScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +491,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SortIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.garthmackenzie.SortIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -483,6 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SortIt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.garthmackenzie.SortIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
