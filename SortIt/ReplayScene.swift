@@ -22,7 +22,7 @@ class ReplayScene: SKScene {
         let question = SKLabelNode(fontNamed:"Arial")
         question.text = "Play Again?"
         question.fontSize = 30
-        question.position = CGPoint(x: leftMargin, y: view.bounds.height - topMargin)
+        question.position = CGPoint(x: leftMargin + 50, y: view.bounds.height - topMargin)
         self.addChild(question)
         
         let playAgainButton =
@@ -34,7 +34,7 @@ class ReplayScene: SKScene {
         self.view!.addSubview(playAgainButton)
         
         let quitButton =
-        UIButton(frame: CGRect(origin: CGPoint(x: leftMargin, y: topMargin + 90), size: CGSize(width: 100, height: 50)))
+        UIButton(frame: CGRect(origin: CGPoint(x: leftMargin, y: topMargin + 80), size: CGSize(width: 100, height: 50)))
         quitButton.backgroundColor = UIColor.clearColor()
         quitButton.setTitle("No", forState: UIControlState.Normal)
         quitButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)

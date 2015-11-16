@@ -41,7 +41,6 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     func replaySceneDidFinish(myScene: ReplayScene, command: String) {
         myScene.view!.removeFromSuperview()
         if (command=="Restart") {
-            enemy.fontColor = UIColor.whiteColor()
             enemy.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
             enemy.physicsBody!.applyImpulse(CGVectorMake(3, 3))
             missile!.hidden = true
@@ -69,29 +68,31 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         }
     }
     override func didMoveToView(view: SKView) {
+        
         /* Setup your REPLAY scene here */
-        replayView = SKView(frame: CGRect(x: frame.size.width/4, y: frame.size.height/4, width: frame.size.width/2, height: frame.size.height/2))
-        let replayScene = ReplayScene(size: CGSize(width: self.frame.size.width/2, height: self.frame.size.height/2))
+        var adjust = CGFloat(4)
+        if model.hasPrefix("iPad") {
+            adjust = 2
+        }
+        replayView = SKView(frame: CGRect(x: frame.size.width/(adjust*2), y: frame.size.height/(adjust*2), width: frame.size.width/adjust, height: frame.size.height/adjust))
+        let replayScene = ReplayScene(size: CGSize(width: self.frame.size.width/adjust, height: self.frame.size.height/adjust))
         self.replayView!.presentScene(replayScene)
         replayScene.thisDelegate = self
         
         /* Setup your GAME scene here */
-        if !model.hasPrefix("iPad") {
-            top = 200
-        }
-        self.backgroundColor = UIColor.blackColor()
         self.scaleMode = .Fill
-        runAction(sound0)
+        self.backgroundColor = UIColor.blackColor()
+        runAction(SKAction.repeatActionForever(sound0))
         myLabel.fontColor = UIColor.greenColor()
-        myLabel2.fontColor = UIColor.random
+        myLabel2.fontColor = UIColor.yellowColor()
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector.zero
         myLabel.text = "Guided Missile"
-        myLabel.fontSize = 26
+        myLabel.fontSize = 30
         myLabel.position = CGPoint(x: CGRectGetMidX(frame), y: (CGRectGetMaxY(frame)-top))
         addChild(myLabel)
         myLabel2.position = CGPoint.addPoint(myLabel.position, right: CGPoint(x: 0, y: -50))
-        myLabel2.fontSize = 26
+        myLabel2.fontSize = 30
         addChild(myLabel2)
         physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)  //wall
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -102,6 +103,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         
         enemy.text = "o"
         enemy.fontSize = 20
+        enemy.fontColor = UIColor.yellowColor()
         enemy.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
         addChild(enemy)
         enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemy.frame.size.width/2)
@@ -316,7 +318,6 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
                 isFired2 = false
                 missile!.position = plane.position
                 missile2!.position = plane.position
-                enemy.fontColor = UIColor.blueColor()
                 enemy.physicsBody!.applyImpulse(CGVector(dx: 3, dy: 3))
                 runAction(sound1)
             }
@@ -359,9 +360,6 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
                 captureBogey(2)
             }
         }
-        if !CGRectContainsRect(view!.frame, plane.frame) {
-            resetPlane()
-        }
     }
     func captureBogey(shot: Int) {
         if soundOn {
@@ -371,7 +369,6 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         }
         if shot < 2 {
             missile!.position = enemy.position
-            enemy.fontColor = UIColor.redColor()
             let action = SKAction.moveToY(top/2, duration: 0.5)
             enemy.physicsBody!.velocity = CGVector(dx: 0,dy: 0)
             enemy.runAction(action)
@@ -379,7 +376,6 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             resetSound()
         } else if shot == 2 {
             missile2!.position = enemy.position
-            enemy.fontColor = UIColor.redColor()
             let action = SKAction.moveToY(top/2, duration: 0.5)
             enemy.physicsBody!.velocity = CGVector(dx: 0,dy: 0)
             enemy.runAction(action)
