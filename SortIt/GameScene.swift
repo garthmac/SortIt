@@ -14,7 +14,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     let myLabel = SKLabelNode(fontNamed:"Chalkduster")
     let myLabel2 = SKLabelNode(fontNamed:"Chalkduster")
     let enemy = SKLabelNode(fontNamed:"Arial Bold")
-    let plane = SKSpriteNode(imageNamed:"Spaceship")
+    let plane = SKSpriteNode(imageNamed:"F-15Z1")
     var fireButton = SKShapeNode?()
     var fireButton2 = SKShapeNode?()
     let missile = SKEmitterNode(fileNamed: "Explosion")  //(fontNamed:"Arial Bold")
@@ -132,8 +132,8 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         addChild(fireButton2!)
         
         resetPlane()
-        plane.xScale = 0.2
-        plane.yScale = 0.2
+        plane.xScale = 0.15
+        plane.yScale = 0.15
         addChild(plane)
         plane.physicsBody = SKPhysicsBody(circleOfRadius: enemy.frame.size.width/2)
         plane.physicsBody!.dynamic = false  //added
@@ -151,8 +151,8 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         addChild(missile2!)
     }
     func resetFireButtons() {
-        fireButton!.position = CGPoint(x: plane.position.x+60, y: plane.position.y+15)  //put it off the wing edge
-        fireButton2!.position = CGPoint(x: plane.position.x-60, y: plane.position.y+15)  //put it off the wing edge
+        fireButton!.position = CGPoint(x: plane.position.x+90, y: plane.position.y+15)  //put it off the wing edge
+        fireButton2!.position = CGPoint(x: plane.position.x-90, y: plane.position.y+15)  //put it off the wing edge
     }
     func resetPlane() {
         plane.position = CGPoint(x: frame.size.width/2, y: top)
@@ -276,11 +276,11 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         for touch in touches {
             if touch.tapCount == 1 {
                 let location = touch.locationInNode(self)
-                let sprite = SKSpriteNode(imageNamed:"Spaceship")
+                let sprite = SKSpriteNode(imageNamed:"F-15Z1")
                 launchedSprites++
                 spriteNodeDict[idx] = sprite
                 updateScoreBoard()
-                let scale = max(CGFloat.random(18.0)/100.0, 0.12)
+                let scale = max(CGFloat.random(12.0)/100.0, 0.08)
                 //print(scale)
                 sprite.xScale = scale
                 sprite.yScale = scale
