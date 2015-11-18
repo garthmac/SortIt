@@ -1,11 +1,11 @@
-# SortIt (alias RedBlock DangerZone)
+# SortIt (alias RedBlock DangerZone/Strike Eagle)
 
 uses SpriteKit
 - automatic play - levels incremented and HighScore saved
--features squadron of 23 fighter jets + Squadron leader
+- features squadron of 23 fighter jets + Squadron leader
 
-- Leader board (fake) added (showing a different top two + user per view)
-  with option to take selfie
+- add squadron, flyBy animations, Constants, sky emitters, 
+resetMissile and replay changes
 
 No adverts; In App Purchases; Game Center High Score plus 8 achievements
 - added optimization
@@ -24,8 +24,8 @@ Asset Credits
 Pineapple background:
 http://www.mauihomes.net  (Fred Haywood's daughter painted it)'
 
-extension_UIImage used in Credits page:
-https://twitter.com/dwineman
+F-15E_391st_USAF:
+https://commons.wikimedia.org/wiki/File:F-15E_391st_USAF_081215-F-7823A-931.jpg
 
 jazzloop sound:
 https://www.youtube.com/watch?v=Oyvx5peAm34&feature=youtu.be&a

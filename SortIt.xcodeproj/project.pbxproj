@@ -20,7 +20,6 @@
 		716340781BF9B09000D0CC4D /* Magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = 716340771BF9B09000D0CC4D /* Magic.sks */; };
 		7163407A1BF9B0E600D0CC4D /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 716340791BF9B0E600D0CC4D /* Smoke.sks */; };
 		7163407C1BF9B11A00D0CC4D /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7163407B1BF9B11A00D0CC4D /* Fire.sks */; };
-		7163407F1BFA712A00D0CC4D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7163407D1BFA712A00D0CC4D /* README.md */; };
 		716340801BFA712A00D0CC4D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7163407E1BFA712A00D0CC4D /* LICENSE */; };
 		716340821BFAA80100D0CC4D /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716340811BFAA80100D0CC4D /* iTunesArtwork@2x.png */; };
 		716340981BFAA85A00D0CC4D /* Icon-Small-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 716340841BFAA85A00D0CC4D /* Icon-Small-29.png */; };
@@ -43,6 +42,7 @@
 		716340A91BFAA85A00D0CC4D /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716340951BFAA85A00D0CC4D /* Icon-72@2x.png */; };
 		716340AA1BFAA85A00D0CC4D /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 716340961BFAA85A00D0CC4D /* Icon-76.png */; };
 		716340AB1BFAA85A00D0CC4D /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716340971BFAA85A00D0CC4D /* Icon-76@2x.png */; };
+		716340AD1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 716340AC1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg */; };
 		7170ADBB1BF83EC400CC51CA /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7170ADB91BF83EC400CC51CA /* Explosion.sks */; };
 		71E44B7A1BF66E54000869CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B791BF66E54000869CA /* AppDelegate.swift */; };
 		71E44B7C1BF66E54000869CA /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 71E44B7B1BF66E54000869CA /* GameScene.sks */; };
@@ -111,6 +111,7 @@
 		716340951BFAA85A00D0CC4D /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		716340961BFAA85A00D0CC4D /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		716340971BFAA85A00D0CC4D /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		716340AC1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "F-15E_391st_USAF_081215-F-7823A-931.jpg"; sourceTree = "<group>"; };
 		7170ADB91BF83EC400CC51CA /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Explosion.sks; path = space/Explosion.sks; sourceTree = "<group>"; };
 		71E44B761BF66E54000869CA /* SortIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E44B791BF66E54000869CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				716340811BFAA80100D0CC4D /* iTunesArtwork@2x.png */,
+				716340AC1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg */,
 				716340831BFAA83D00D0CC4D /* Icons */,
 				716340541BF843DE00D0CC4D /* emitters */,
 			);
@@ -388,6 +390,7 @@
 				71E44BAE1BF6912E000869CA /* beep10.mp3 in Resources */,
 				71E44BAC1BF690F9000869CA /* beep5.mp3 in Resources */,
 				7163406B1BF9849700D0CC4D /* Fireflies.sks in Resources */,
+				716340AD1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg in Resources */,
 				716340A11BFAA85A00D0CC4D /* Icon-24@2x.png in Resources */,
 				7163409C1BFAA85A00D0CC4D /* Icon-40@2x.png in Resources */,
 				7163405C1BF849C100D0CC4D /* Snow.sks in Resources */,
@@ -445,7 +448,6 @@
 			files = (
 				71E44B7E1BF66E54000869CA /* GameScene.swift in Sources */,
 				71E44B801BF66E54000869CA /* GameViewController.swift in Sources */,
-				7163407F1BFA712A00D0CC4D /* README.md in Sources */,
 				71E44B7A1BF66E54000869CA /* AppDelegate.swift in Sources */,
 				716340681BF932F600D0CC4D /* ReplayScene.swift in Sources */,
 			);
