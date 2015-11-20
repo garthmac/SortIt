@@ -23,6 +23,7 @@ Asset Credits
 
 F-15E_391st_USAF:
 https://commons.wikimedia.org/wiki/File:F-15E_391st_USAF_081215-F-7823A-931.jpg
+https://en.wikipedia.org/wiki/McDonnell_Douglas_F-15E_Strike_Eagle#Specifications_.28F-15E.29
 
 F-35A:
 https://en.wikipedia.org/wiki/Lockheed_Martin_F-35_Lightning_II#/media/File:F-35A_three-view.PNG

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		714D08D81BFE78FF00A679EC /* Halo.sks in Resources */ = {isa = PBXBuildFile; fileRef = 714D08D71BFE78FF00A679EC /* Halo.sks */; };
 		7163405C1BF849C100D0CC4D /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7163405B1BF849C100D0CC4D /* Snow.sks */; };
 		716340621BF8527F00D0CC4D /* aircraft013.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 716340611BF8527F00D0CC4D /* aircraft013.mp3 */; };
 		716340641BF8613200D0CC4D /* aircraft036.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 716340631BF8613200D0CC4D /* aircraft036.mp3 */; };
@@ -75,6 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		714D08D71BFE78FF00A679EC /* Halo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Halo.sks; sourceTree = "<group>"; };
 		7163405B1BF849C100D0CC4D /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
 		716340611BF8527F00D0CC4D /* aircraft013.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft013.mp3; sourceTree = "<group>"; };
 		716340631BF8613200D0CC4D /* aircraft036.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft036.mp3; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				716340791BF9B0E600D0CC4D /* Smoke.sks */,
 				7163405B1BF849C100D0CC4D /* Snow.sks */,
 				7163406A1BF9849700D0CC4D /* spark.png */,
+				714D08D71BFE78FF00A679EC /* Halo.sks */,
 			);
 			name = emitters;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				7163406C1BF9849700D0CC4D /* spark.png in Resources */,
 				7163409A1BFAA85A00D0CC4D /* Icon-29@3x.png in Resources */,
 				7163409E1BFAA85A00D0CC4D /* Icon-50@2x.png in Resources */,
+				714D08D81BFE78FF00A679EC /* Halo.sks in Resources */,
 				71E44BAE1BF6912E000869CA /* beep10.mp3 in Resources */,
 				71E44BAC1BF690F9000869CA /* beep5.mp3 in Resources */,
 				7163406B1BF9849700D0CC4D /* Fireflies.sks in Resources */,

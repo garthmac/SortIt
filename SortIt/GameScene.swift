@@ -18,6 +18,8 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     var jetIndex = 0
     var fireButton = SKShapeNode?()
     var fireButton2 = SKShapeNode?()
+    let fireText = SKLabelNode(fontNamed:"Arial Bold")
+    let fireText2 = SKLabelNode(fontNamed:"Arial Bold")
     let missile = SKEmitterNode(fileNamed: "Explosion")  //(fontNamed:"Arial Bold")
     let missile2 = SKEmitterNode(fileNamed: "Explosion")
     let sky1 = SKEmitterNode(fileNamed: "Fireflies")
@@ -42,24 +44,36 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     var lostSprites = 0
     var planeDamage = 0
     var score = 0  //number of captured Bogeys
+    var scaleFactor = CGFloat(1.0)
+    private var autoStartTimer: NSTimer?
+    var missilesFired = 0
+    
     struct Constants {
+        static let EngineOffset = CGFloat(25)
         static let FlameOffset = CGFloat(420.0)
-        static let Scale = CGFloat(0.15)
+        static let Scale = CGFloat(0.25)
         static let SquadronSize = 12
         static let Top = CGFloat(100.0)
+        static let VerticlePosition = CGFloat(0.4)
     }
-    func flyBy () {
+    func flyBy() {
+        plane.xScale = scaleFactor/2
+        plane.yScale = 0.5
+        var planeSequence = [SKAction]()
+        let action1 = SKAction.moveTo(CGPoint(x: frame.width/2, y: frame.height*Constants.VerticlePosition), duration: 3)
+        planeSequence.append(action1)
+        let action2 = SKAction.scaleBy(Constants.Scale*2 , duration: 5)  //*2 becuse made 1/2 scale at beginning of flyBy()
+        planeSequence.append(action2)
+
         let sprite = SKSpriteNode.next(jetIndex)
         sprite.xScale = scaleFactor
         sprite.position = CGPoint(x: frame.width/2, y: -frame.height/4)
         addFlames(sprite)
-        let action = SKAction.moveToY(frame.height*2, duration: 12)
+        let action = SKAction.moveToY(frame.height*1.6, duration: 9)
         sprite.runAction(action, completion: { [weak self] (success) -> Void in
             sprite.removeFromParent()
-            self!.plane.xScale = self!.scaleFactor
-            self!.plane.position = CGPoint(x: self!.frame.width/2, y: self!.frame.height*0.5)
-            let action = SKAction.scaleBy(Constants.Scale , duration: 5)  //resizeByWidth(-self!.plane.size.width/2, height: -self!.plane.size.height/2, duration: 5)
-            self!.plane.runAction(action, completion: { [weak self] (success) -> Void in
+            //after dummy sprite flys by, animate actual plane
+            self!.plane.runAction(SKAction.group(planeSequence), completion: { [weak self] (success) -> Void in
                 self!.resetPlane()
                 })
             })
@@ -80,26 +94,30 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         case 2: return Constants.FlameOffset - 15
         case 3: return Constants.FlameOffset + 85
         case 4: return Constants.FlameOffset + 70
-        case 5: return Constants.FlameOffset + 55
+        case 5: return Constants.FlameOffset + 35
+        case 6: return Constants.FlameOffset + 55
         default: return Constants.FlameOffset
         }
     }
     func addFlames(spriteOrPlane: SKSpriteNode) {
         let fire = SKEmitterNode(fileNamed: "Fire")
-        if jetIndex > 4 {
+        if jetIndex > 5 {
             fire!.position = CGPoint(x: 0, y: flameOffset(jetIndex)-frame.height)
-            spriteOrPlane.addChild(fire!)
             fire!.zRotation = CGFloat(M_PI)
+            fire!.zPosition = spriteOrPlane.zPosition
             addChild(spriteOrPlane)
+            spriteOrPlane.addChild(fire!)
         } else {
-            fire!.position = CGPoint(x: -25, y: flameOffset(jetIndex)-frame.height)
-            spriteOrPlane.addChild(fire!)
+            fire!.position = CGPoint(x: Constants.EngineOffset, y: flameOffset(jetIndex)-frame.height)
             fire!.zRotation = CGFloat(M_PI)
+            fire!.zPosition = spriteOrPlane.zPosition + 0.1
             let fire2 = SKEmitterNode(fileNamed: "Fire")
-            fire2!.position = CGPoint(x: 25, y: flameOffset(jetIndex)-frame.height)
-            spriteOrPlane.addChild(fire2!)
+            fire2!.position = CGPoint(x: -Constants.EngineOffset, y: flameOffset(jetIndex)-frame.height)
             fire2!.zRotation = CGFloat(M_PI)
+            fire2!.zPosition = spriteOrPlane.zPosition + 0.1
             addChild(spriteOrPlane)
+            spriteOrPlane.addChild(fire!)
+            spriteOrPlane.addChild(fire2!)
         }
     }
     func replaySceneDidFinish(myScene: ReplayScene, command: String) {
@@ -128,14 +146,17 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             lostSprites = 0
             planeDamage = 0
             score = 0
-            myLabel.fontColor = UIColor.greenColor()
             updateScoreBoard()
-            for (_,sprite) in spriteNodeDict {
-                sprite.removeFromParent()
+            fireButton!.hidden = true
+            fireButton2!.hidden = true
+            for s in spriteNodes {
+                s.removeFromParent()
             }
             addSquadron()
             flyBy()
         } else {
+            autoStartTimer?.invalidate()
+            autoStartTimer = nil
             let delay = Double(2) * Double(NSEC_PER_SEC)
             let totalTime = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), Int64(delay))
             dispatch_after(totalTime, dispatch_get_main_queue()) { [weak self] (success) -> Void in
@@ -143,19 +164,28 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             }
         }
     }
-    var scaleFactor = CGFloat(1.0)
-    var spriteNodeDict = [Int:SKSpriteNode]()
+    func calculatedScale() -> CGFloat { //for a Scale of 0.20, sprites will be 0.10-0.18
+        let int = UInt32(100-Int(Constants.Scale*100))
+        //print(int)
+        let r = arc4random() % int
+        //print(r)
+        var scale = CGFloat(r)/1000
+        //print(scale)
+        scale = scale + Constants.Scale/2
+        //print(scale)
+        return scale
+    }
+    var spriteNodes = [SKSpriteNode]()
     func addSquadron() {
-        var idx = 0
+        let planeSavedSpot = CGPoint(x: Int(frame.width*0.5), y: Int(frame.height*Constants.VerticlePosition))
         for _ in 0..<Constants.SquadronSize {
             let sprite = SKSpriteNode.next(jetIndex)
-            launchedSprites++
-            spriteNodeDict[idx] = sprite
-            updateScoreBoard()
-            let scale = max(CGFloat.random(12.0)/100.0, 0.08)
+            let scale = calculatedScale()
             sprite.xScale = scale*scaleFactor
             sprite.yScale = scale
-            sprite.position = CGPoint (x: CGFloat.random(frame.maxX), y: CGFloat.random(frame.maxY))
+            repeat {  //don't put a sprite on the spot where the plane will animate to
+                sprite.position = CGPoint.random(frame)
+            } while insertionSpotTaken(sprite.position, reserved: planeSavedSpot)
             let fire = SKEmitterNode(fileNamed: "Fire")
             fire!.position = CGPoint(x: 0, y: flameOffset(jetIndex)-frame.height)
             sprite.addChild(fire!)
@@ -169,16 +199,29 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             sprite.physicsBody!.collisionBitMask = enemyCategory
             sprite.physicsBody!.contactTestBitMask = enemyCategory
             addChild(sprite)
-            idx += 1
+            spriteNodes.append(sprite)
+            launchedSprites++
+            updateScoreBoard()
         }
     }
+    func insertionSpotTaken(test: CGPoint, reserved: CGPoint) -> Bool {
+        let airSpace = 100
+        let dX = (test.x - reserved.x)
+        let dY = (test.y - reserved.y)
+        if (Int(abs(dX)) < airSpace) && (Int(abs(dY)) < airSpace) {
+            return true
+        } else {
+            return false
+        }
+    }
+    //MAIN
     override func didMoveToView(view: SKView) {
         /* Setup your REPLAY scene here */
         var replayAdjustment = CGFloat(4)
         if model.hasPrefix("iPad") {
             replayAdjustment = 2.5  //was 2
         } else {
-            scaleFactor = 0.64
+            scaleFactor = 0.67
         }
         replayView = SKView(frame: CGRect(x: frame.size.width/(replayAdjustment*2), y: frame.size.height/(replayAdjustment*2), width: frame.size.width/replayAdjustment, height: frame.size.height/replayAdjustment))
         let replayScene = ReplayScene(size: CGSize(width: self.frame.size.width/replayAdjustment, height: self.frame.size.height/replayAdjustment))
@@ -188,6 +231,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         /* Setup your GAME scene here */
         self.scaleMode = .Fill
         self.backgroundColor = UIColor.blackColor()
+        //view.ignoresSiblingOrder = true
         runAction(SKAction.repeatActionForever(sound0))
         sky = [sky1!, sky2!, sky3!]
         skyIndex = Int(arc4random() % 3)
@@ -198,10 +242,10 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
                 sky[idx].numParticlesToEmit = 1
             }
         }
-        myLabel.fontColor = UIColor.blueColor()
-        myLabel2.fontColor = UIColor.purpleColor()
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector.zero
+        myLabel.fontColor = UIColor.blueColor()
+        myLabel2.fontColor = UIColor.purpleColor()
         myLabel.text = "Guided Missile"
         myLabel.fontSize = 30
         myLabel.position = CGPoint(x: CGRectGetMidX(frame), y: (CGRectGetMaxY(frame)-Constants.Top))
@@ -210,7 +254,6 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         myLabel2.fontSize = 30
         addChild(myLabel2)
         physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)  //wall
-        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsBody!.friction = 0
 //        physicsBody!.categoryBitMask = wallCategory
 //        physicsBody!.collisionBitMask = enemyCategory
@@ -229,24 +272,24 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         enemy.physicsBody!.collisionBitMask = spriteCategory
         enemy.physicsBody!.contactTestBitMask = spriteCategory
         
-        let fireText = SKLabelNode(fontNamed:"Arial Bold")
+        addSquadron()
         fireText.text = "Fire"
         fireText.fontSize = 10
         fireButton = SKShapeNode(circleOfRadius: fireText.frame.width)
         fireButton!.fillColor = SKColor.redColor()
         fireButton!.name = "fireButton"
+        fireButton!.hidden = true
         fireButton!.addChild(fireText)
+        
         addChild(fireButton!)
-        let fireText2 = SKLabelNode(fontNamed:"Arial Bold")
         fireText2.text = "Fire"
         fireText2.fontSize = 10
         fireButton2 = SKShapeNode(circleOfRadius: fireText2.frame.width)
         fireButton2!.fillColor = SKColor.blueColor()
         fireButton2!.name = "fireButton2"
+        fireButton2!.hidden = true
         fireButton2!.addChild(fireText2)
         addChild(fireButton2!)
-        
-        addSquadron()
         flyBy()
         
 //        missile.text = "."
@@ -255,18 +298,31 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         missile2!.hidden = true
         addChild(missile!)
         addChild(missile2!)
+        setAutoStartTimer()
+    }
+    // MARK: - autoStartTimer
+    private func setAutoStartTimer() {
+        autoStartTimer =  NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "fireAutoStart:", userInfo: nil, repeats: true)
+    }
+    //When the timer fires – and the missle velocity is 0 in dx or dy push it:
+    func fireAutoStart(timer: NSTimer) {
+        if enemy.physicsBody?.velocity.dx == 0 || enemy.physicsBody?.velocity.dy == 0 {
+            enemy.physicsBody!.applyImpulse(CGVector(dx: 3, dy: 3))
+        }
     }
     func resetFireButtons() {
-        fireButton!.position = CGPoint(x: plane.position.x+90, y: plane.position.y+15)  //put it off the wing edge
-        fireButton2!.position = CGPoint(x: plane.position.x-90, y: plane.position.y+15)  //put it off the wing edge
+        fireButton!.position = CGPoint(x: plane.position.x + 100*scaleFactor , y: plane.position.y+15)  //put it off the right wing edge
+        fireButton2!.position = CGPoint(x: plane.position.x - 100*scaleFactor, y: plane.position.y+15)  //put it off the left wing edge
     }
     func resetPlane() {
+        fireButton!.hidden = false
+        fireButton2!.hidden = false
         plane.xScale = Constants.Scale * scaleFactor
         plane.yScale = Constants.Scale
-        plane.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        plane.position = CGPoint(x: frame.size.width/2, y: frame.size.height*Constants.VerticlePosition)
         resetFireButtons()
     }
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {  //drag the plane
         for touch: AnyObject in touches {
             let touchLocation = touch.locationInNode(self)
             let previousLocation = touch.previousLocationInNode(self)
@@ -280,7 +336,6 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             resetFireButtons()
         }
     }
-
     //You wan to define collision categories so that each kind of body in your game uses its own bit in the mask. (You've got a good idea using Swift's binary literal notation, but you're defining categories that overlap.) Here's an example of non-overlapping categories:
     enum PhysicsCategory : UInt32 {
         case None   = 0
@@ -304,7 +359,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
                     sprite: contact.bodyA.node as! SKSpriteNode)
             }
         case PhysicsCategory.Plane.rawValue | PhysicsCategory.Enemy.rawValue:
-            print("plane + enemy")
+            //print("plane + enemy")
             if contact.bodyA.categoryBitMask == PhysicsCategory.Plane.rawValue {
                 handleCollision(contact.bodyA.node as! SKSpriteNode,
                     enemy: contact.bodyB.node as! SKLabelNode)
@@ -393,21 +448,26 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
                         runAction(sound5)
                         missile!.position = plane.position
                         missile!.hidden = false
+                        missilesFired++
                     } else if (thisNode.name == fireButton2?.name) {
                         isFired2 = true
                         soundOn = true
                         runAction(sound5)
                         missile2!.position = plane.position
                         missile2!.hidden = false
+                        missilesFired++
+                    }
+                    if missilesFired == 16 {  //end of level
+                        replay()
                     }
                 }
             } else if touch.tapCount == 2 {
-                resetMissile()
+                enemy.physicsBody!.applyImpulse(CGVector(dx: 3, dy: 3))
             }
         }
     }
     func resetMissile() {
-        let delay = Double(2) * Double(NSEC_PER_SEC)
+        let delay = Double(1) * Double(NSEC_PER_SEC)
         let totalTime = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), Int64(delay))
         dispatch_after(totalTime, dispatch_get_main_queue()) { [weak self] (success) -> Void in
             self!.missile!.hidden = true
@@ -481,25 +541,27 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     }
 }
 
-private extension CGFloat {
-    static func random(max: CGFloat) -> CGFloat {
-        return CGFloat(arc4random() % UInt32(Int(max)))
-    }
-}
 private extension CGPoint {
     static func addPoint(left: CGPoint, right: CGPoint) -> CGPoint {
         return CGPoint(x: left.x + right.x, y: left.y + right.y)
     }
+    static func random(frame: CGRect) -> CGPoint {  //random sprite(center) location within bordered frame
+        let border = 40
+        let x = Int(frame.maxX) - border*2
+        let y = Int(frame.maxY) - border*2
+        return CGPoint(x: Int(arc4random() % UInt32(x)) + border, y: Int(arc4random() % UInt32(y)) + border)
+    }
 }
 private extension SKSpriteNode {
     class var random: SKSpriteNode {
-        switch arc4random() % 6 {
+        switch arc4random() % 7 {
         case 0: return SKSpriteNode(imageNamed:"F-15Z1")
         case 1: return SKSpriteNode(imageNamed:"MiG-29Z")
         case 2: return SKSpriteNode(imageNamed:"Su-33")
         case 3: return SKSpriteNode(imageNamed:"F1444842379440")
         case 4: return SKSpriteNode(imageNamed:"F-104 Starfighter")
-        case 5: return SKSpriteNode(imageNamed:"F-35A")
+        case 5: return SKSpriteNode(imageNamed:"F-RussianZ1")
+        case 6: return SKSpriteNode(imageNamed:"F-35A")
         default: return SKSpriteNode(imageNamed:"F-15Z1")
         }
     }
@@ -510,7 +572,8 @@ private extension SKSpriteNode {
         case 2: return SKSpriteNode(imageNamed:"Su-33")
         case 3: return SKSpriteNode(imageNamed:"F1444842379440")
         case 4: return SKSpriteNode(imageNamed:"F-104 Starfighter")
-        case 5: return SKSpriteNode(imageNamed:"F-35A")
+        case 5: return SKSpriteNode(imageNamed:"F-RussianZ1")
+        case 6: return SKSpriteNode(imageNamed:"F-35A")
         default: return SKSpriteNode(imageNamed:"F-15Z1")
         }
     }
