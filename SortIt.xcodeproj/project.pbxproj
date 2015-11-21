@@ -45,6 +45,8 @@
 		716340AB1BFAA85A00D0CC4D /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716340971BFAA85A00D0CC4D /* Icon-76@2x.png */; };
 		716340AD1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 716340AC1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg */; };
 		7170ADBB1BF83EC400CC51CA /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7170ADB91BF83EC400CC51CA /* Explosion.sks */; };
+		71E1BFAA1BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 71E1BFA91BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg */; };
+		71E1BFB11C004E060028BF62 /* laser_ship.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71E1BFB01C004E060028BF62 /* laser_ship.mp3 */; };
 		71E44B7A1BF66E54000869CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B791BF66E54000869CA /* AppDelegate.swift */; };
 		71E44B7C1BF66E54000869CA /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 71E44B7B1BF66E54000869CA /* GameScene.sks */; };
 		71E44B7E1BF66E54000869CA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B7D1BF66E54000869CA /* GameScene.swift */; };
@@ -115,6 +117,8 @@
 		716340971BFAA85A00D0CC4D /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
 		716340AC1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "F-15E_391st_USAF_081215-F-7823A-931.jpg"; sourceTree = "<group>"; };
 		7170ADB91BF83EC400CC51CA /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Explosion.sks; path = space/Explosion.sks; sourceTree = "<group>"; };
+		71E1BFA91BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 18mqkoo90e843jpg.jpg; sourceTree = "<group>"; };
+		71E1BFB01C004E060028BF62 /* laser_ship.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser_ship.mp3; sourceTree = "<group>"; };
 		71E44B761BF66E54000869CA /* SortIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E44B791BF66E54000869CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71E44B7B1BF66E54000869CA /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -207,12 +211,28 @@
 			isa = PBXGroup;
 			children = (
 				716340811BFAA80100D0CC4D /* iTunesArtwork@2x.png */,
+				71E1BFA91BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg */,
 				716340AC1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg */,
+				71E1BFB21C0070070028BF62 /* Audio */,
 				716340831BFAA83D00D0CC4D /* Icons */,
 				716340541BF843DE00D0CC4D /* emitters */,
 			);
 			name = Assets;
 			path = SortIt;
+			sourceTree = "<group>";
+		};
+		71E1BFB21C0070070028BF62 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				71E44BAB1BF690F9000869CA /* beep5.mp3 */,
+				71E44BAD1BF6912E000869CA /* beep10.mp3 */,
+				716340611BF8527F00D0CC4D /* aircraft013.mp3 */,
+				716340631BF8613200D0CC4D /* aircraft036.mp3 */,
+				7163406D1BF9936900D0CC4D /* aircraft064.mp3 */,
+				716340651BF9256F00D0CC4D /* 16.7 Million Particles on an iPad Pro.mp3 */,
+				71E1BFB01C004E060028BF62 /* laser_ship.mp3 */,
+			);
+			name = Audio;
 			sourceTree = "<group>";
 		};
 		71E44B6D1BF66E54000869CA = {
@@ -250,12 +270,6 @@
 				71E44B841BF66E54000869CA /* Assets.xcassets */,
 				71E44B861BF66E54000869CA /* LaunchScreen.storyboard */,
 				71E44B891BF66E54000869CA /* Info.plist */,
-				71E44BAB1BF690F9000869CA /* beep5.mp3 */,
-				71E44BAD1BF6912E000869CA /* beep10.mp3 */,
-				716340611BF8527F00D0CC4D /* aircraft013.mp3 */,
-				716340631BF8613200D0CC4D /* aircraft036.mp3 */,
-				7163406D1BF9936900D0CC4D /* aircraft064.mp3 */,
-				716340651BF9256F00D0CC4D /* 16.7 Million Particles on an iPad Pro.mp3 */,
 			);
 			path = SortIt;
 			sourceTree = "<group>";
@@ -392,6 +406,7 @@
 				7163409E1BFAA85A00D0CC4D /* Icon-50@2x.png in Resources */,
 				714D08D81BFE78FF00A679EC /* Halo.sks in Resources */,
 				71E44BAE1BF6912E000869CA /* beep10.mp3 in Resources */,
+				71E1BFAA1BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg in Resources */,
 				71E44BAC1BF690F9000869CA /* beep5.mp3 in Resources */,
 				7163406B1BF9849700D0CC4D /* Fireflies.sks in Resources */,
 				716340AD1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg in Resources */,
@@ -426,6 +441,7 @@
 				716340A51BFAA85A00D0CC4D /* Icon-98@2x.png in Resources */,
 				716340A31BFAA85A00D0CC4D /* Icon-44@2x.png in Resources */,
 				716340A91BFAA85A00D0CC4D /* Icon-72@2x.png in Resources */,
+				71E1BFB11C004E060028BF62 /* laser_ship.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
