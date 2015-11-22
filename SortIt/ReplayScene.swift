@@ -26,7 +26,7 @@ class ReplayScene: SKScene {
         self.addChild(question)
         
         let playAgainButton =
-        UIButton(frame: CGRect(origin: CGPoint(x: leftMargin, y: topMargin + 15), size: CGSize(width: 80, height: 20)))
+        UIButton(frame: CGRect(origin: CGPoint(x: leftMargin, y: topMargin + 20), size: CGSize(width: 80, height: 20)))
         playAgainButton.backgroundColor = UIColor.clearColor()
         playAgainButton.setTitle("Yes", forState: UIControlState.Normal)
         playAgainButton.setTitleColor(UIColor.greenColor(), forState: UIControlState.Normal)
@@ -34,7 +34,7 @@ class ReplayScene: SKScene {
         self.view!.addSubview(playAgainButton)
         
         let quitButton =
-        UIButton(frame: CGRect(origin: CGPoint(x: leftMargin, y: topMargin + 45), size: CGSize(width: 80, height: 20)))
+        UIButton(frame: CGRect(origin: CGPoint(x: leftMargin, y: topMargin + 50), size: CGSize(width: 80, height: 20)))
         quitButton.backgroundColor = UIColor.clearColor()
         quitButton.setTitle("No", forState: UIControlState.Normal)
         quitButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
