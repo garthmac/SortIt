@@ -20,7 +20,7 @@ class ReplayScene: SKScene {
         let topMargin = view.bounds.height/4
         
         let question = SKLabelNode(fontNamed:"Arial")
-        question.text = "Play Again?"
+        question.text = "Next Mission?"
         question.fontSize = 20
         question.position = CGPoint(x: leftMargin + 30, y: view.bounds.height - topMargin)
         self.addChild(question)

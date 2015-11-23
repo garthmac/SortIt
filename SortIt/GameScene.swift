@@ -16,7 +16,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     // MARK: - SKNodes
     let enemy = SKLabelNode(fontNamed:"Arial Bold")
     let laser = SKSpriteNode(imageNamed: "laserbeam_blueVerticle")
-    var plane = SKSpriteNode(imageNamed:"F-35A")
+    var plane = SKSpriteNode(imageNamed:"F-35AZ")
     var jetIndex = 0
     var fireButton = SKShapeNode?()
     var fireButton2 = SKShapeNode?()
@@ -69,13 +69,13 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     }
     // MARK: - flyBy()
     func flyBy() {
-        let sprite = SKSpriteNode.next(jetIndex)
+        let sprite = SKSpriteNode.next(jetIndex)  //plane standin double for flyBy
         sprite.xScale = scaleFactor
         sprite.position = CGPoint(x: frame.width/2, y: -frame.height*0.6)
         addFlames(sprite)
         
         plane.xScale = scaleFactor/2
-        plane.yScale = 0.5
+        plane.yScale = scaleFactor/2
         let eitherSide = Int(arc4random() % 2) == 0
         if eitherSide {
             plane.position.x = frame.width
@@ -106,7 +106,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         plane.physicsBody!.contactTestBitMask = enemyCategory
     }
     func flameOffset(jet: Int) -> CGFloat {
-        switch jet {
+        switch jet % 12 {
         case 0: return Constants.FlameOffset + 55
         case 1: return Constants.FlameOffset - 10
         case 2: return Constants.FlameOffset + 50
@@ -115,6 +115,10 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         case 5: return Constants.FlameOffset - 65
         case 6: return Constants.FlameOffset + 35
         case 7: return Constants.FlameOffset + 20
+        case 8: return Constants.FlameOffset - 10
+        case 9: return Constants.FlameOffset + 55
+        case 10: return Constants.FlameOffset + 50
+        case 11: return Constants.FlameOffset - 10
         default: return Constants.FlameOffset
         }
     }
@@ -147,6 +151,8 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             jetIndex += 1
             plane.removeFromParent()
             plane = SKSpriteNode.next(jetIndex)
+            myLabel.fontColor = UIColor.random
+            myLabel2.fontColor = UIColor.random
             skyIndex = Int(arc4random() % 3)
             sky[skyIndex].numParticlesToEmit = 0
             sky[skyIndex].position = CGPoint(x: frame.width/2, y: frame.height)
@@ -230,13 +236,12 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             scaleFactor = 0.67
         }
         replayView = SKView(frame: CGRect(x: frame.size.width/(replayAdjustment*2), y: frame.size.height/(replayAdjustment*2), width: frame.size.width/replayAdjustment, height: frame.size.height/replayAdjustment))
-        let replayScene = ReplayScene(size: CGSize(width: self.frame.size.width/replayAdjustment, height: self.frame.size.height/replayAdjustment))
-        self.replayView!.presentScene(replayScene)
+        let replayScene = ReplayScene(size: CGSize(width: frame.size.width/replayAdjustment, height: frame.size.height/replayAdjustment))
+        replayView!.presentScene(replayScene)
         replayScene.thisDelegate = self
         
         /* Setup your GAME scene here */
-        self.scaleMode = .Fill
-        self.backgroundColor = UIColor.blackColor()
+        backgroundColor = UIColor.blackColor()
         //view.ignoresSiblingOrder = true  in GVC
         runAction(SKAction.repeatActionForever(sound0))
         sky = [sky1!, sky2!, sky3!, smoke!, halo!]
@@ -647,28 +652,36 @@ private extension CGVector {
 }
 private extension SKSpriteNode {
     class var random: SKSpriteNode {
-        switch arc4random() % 8 {
-        case 0: return SKSpriteNode(imageNamed:"F-35A")
+        switch arc4random() % 12 {
+        case 0: return SKSpriteNode(imageNamed:"F-35AZ")
         case 1: return SKSpriteNode(imageNamed:"F-15Z1")
-        case 2: return SKSpriteNode(imageNamed:"MiG-29Z")
+        case 2: return SKSpriteNode(imageNamed:"MiG-29MZ")
         case 3: return SKSpriteNode(imageNamed:"Su-33")
         case 4: return SKSpriteNode(imageNamed:"F1444842379440")
         case 5: return SKSpriteNode(imageNamed:"F-104 Starfighter")
         case 6: return SKSpriteNode(imageNamed:"F-RussianZ1")
         case 7: return SKSpriteNode(imageNamed:"T-50")
+        case 8: return SKSpriteNode(imageNamed:"F-15")
+        case 9: return SKSpriteNode(imageNamed:"F-35A")
+        case 10: return SKSpriteNode(imageNamed:"MiG-29Z")
+        case 11: return SKSpriteNode(imageNamed:"F-15Z")
         default: return SKSpriteNode(imageNamed:"F-15Z1")
         }
     }
     static func next(index: Int) -> SKSpriteNode {
-        switch index {
-        case 0: return SKSpriteNode(imageNamed:"F-35A")
+        switch index % 12 {
+        case 0: return SKSpriteNode(imageNamed:"F-35AZ")
         case 1: return SKSpriteNode(imageNamed:"F-15Z1")
-        case 2: return SKSpriteNode(imageNamed:"MiG-29Z")
+        case 2: return SKSpriteNode(imageNamed:"MiG-29MZ")
         case 3: return SKSpriteNode(imageNamed:"Su-33")
         case 4: return SKSpriteNode(imageNamed:"F1444842379440")
         case 5: return SKSpriteNode(imageNamed:"F-104 Starfighter")
         case 6: return SKSpriteNode(imageNamed:"F-RussianZ1")
         case 7: return SKSpriteNode(imageNamed:"T-50")
+        case 8: return SKSpriteNode(imageNamed:"F-15")
+        case 9: return SKSpriteNode(imageNamed:"F-35A")
+        case 10: return SKSpriteNode(imageNamed:"MiG-29Z")
+        case 11: return SKSpriteNode(imageNamed:"F-15Z")
         default: return SKSpriteNode(imageNamed:"F-15Z1")
         }
     }

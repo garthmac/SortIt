@@ -1,3 +1,4 @@
+
 //
 //  GameViewController.swift
 //  SortIt
@@ -10,11 +11,13 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
-
+    var lastBounds = CGRectZero
+    var gameScene: GameScene? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
-
         if let scene = GameScene(fileNamed:"GameScene") {
+            gameScene = scene
+            lastBounds = gameScene!.frame
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
@@ -24,12 +27,36 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .Fill
             
             skView.presentScene(scene)
         }
     }
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !CGRectEqualToRect(view.bounds, lastBounds) {
+            boundsChanged()
+            lastBounds = view.bounds
+        }
+    }
+    func boundsChanged() {
+        if lastBounds.width == gameScene!.frame.width {
+//            for s in gameScene!.spriteNodes {
+//                s.yScale = s.yScale * 0.67
+//            }
+            gameScene!.fireButton!.yScale = 0.67
+            gameScene!.fireButton2!.yScale = 0.67
+//            gameScene!.plane.yScale = gameScene!.plane.yScale * 0.67
+        } else {
+//            for s in gameScene!.spriteNodes {
+//                s.yScale = s.yScale / 0.67
+//            }
+            gameScene!.fireButton!.yScale = gameScene!.fireButton!.yScale / 0.67
+            gameScene!.fireButton2!.yScale = gameScene!.fireButton2!.yScale / 0.67
+//            gameScene!.plane.yScale = gameScene!.plane.yScale / 0.67
+        }
+    }
+    
     override func shouldAutorotate() -> Bool {
         return true
     }
