@@ -7,8 +7,9 @@
 //
 
 import SpriteKit
+import GameKit
 
-class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
+class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate, GKGameCenterControllerDelegate {
     var replayView: SKView?
     let model = UIDevice.currentDevice().model
     let myLabel = SKLabelNode(fontNamed:"Chalkduster")
@@ -41,7 +42,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     let sound1 = SKAction.playSoundFileNamed("beep5.mp3", waitForCompletion: false)
     let sound2 = SKAction.playSoundFileNamed("beep10.mp3", waitForCompletion: false)
     let sound3 = SKAction.playSoundFileNamed("aircraft013.mp3", waitForCompletion: false)
-    let sound4 = SKAction.playSoundFileNamed("aircraft0362.mp3", waitForCompletion: false)
+    let sound4 = SKAction.playSoundFileNamed("aircraft036.mp3", waitForCompletion: false)
     let sound5 = SKAction.playSoundFileNamed("aircraft064.mp3", waitForCompletion: false)
     let sound6 = SKAction.playSoundFileNamed("laser1.mp3", waitForCompletion: false)
     let sound7 = SKAction.playSoundFileNamed("laser3.mp3", waitForCompletion: false)
@@ -49,7 +50,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     var launchedSprites = 0
     var lostSprites = 0
     var planeDamage = 0
-    var score = 0  //number of captured Bogeys
+    var missileHits = 0  //number of captured Bogeys
     var scaleFactor = CGFloat(1.0)
     private var autoStartTimer: NSTimer?
     var missilesFired = 0
@@ -75,7 +76,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         addFlames(sprite)
         
         plane.xScale = scaleFactor/2
-        plane.yScale = scaleFactor/2
+        plane.yScale = 0.5
         let eitherSide = Int(arc4random() % 2) == 0
         if eitherSide {
             plane.position.x = frame.width
@@ -106,25 +107,27 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         plane.physicsBody!.contactTestBitMask = enemyCategory
     }
     func flameOffset(jet: Int) -> CGFloat {
-        switch jet % 12 {
-        case 0: return Constants.FlameOffset + 55
-        case 1: return Constants.FlameOffset - 10
-        case 2: return Constants.FlameOffset + 50
-        case 3: return Constants.FlameOffset - 15
-        case 4: return Constants.FlameOffset + 80
-        case 5: return Constants.FlameOffset - 65
-        case 6: return Constants.FlameOffset + 35
-        case 7: return Constants.FlameOffset + 20
-        case 8: return Constants.FlameOffset - 10
-        case 9: return Constants.FlameOffset + 55
-        case 10: return Constants.FlameOffset + 50
-        case 11: return Constants.FlameOffset - 10
-        default: return Constants.FlameOffset
+        switch jet % 14 {
+        case 0: return Constants.FlameOffset + 50
+        case 1: return Constants.FlameOffset
+        case 2: return Constants.FlameOffset + 130
+        case 3: return Constants.FlameOffset - 10
+        case 4: return Constants.FlameOffset + 50
+        case 5: return Constants.FlameOffset - 15
+        case 6: return Constants.FlameOffset + 80
+        case 7: return Constants.FlameOffset - 65
+        case 8: return Constants.FlameOffset + 35
+        case 9: return Constants.FlameOffset + 20
+        case 10: return Constants.FlameOffset - 10
+        case 11: return Constants.FlameOffset + 55
+        case 12: return Constants.FlameOffset + 50
+        case 13: return Constants.FlameOffset - 10
+        default: return Constants.FlameOffset + 20
         }
     }
     func addFlames(spriteOrPlane: SKSpriteNode) {
         let fire = SKEmitterNode(fileNamed: "Fire")
-        if jetIndex < 1 {
+        if jetIndex < 3 {
             fire!.position = CGPoint(x: 0, y: flameOffset(jetIndex)-frame.height)
             fire!.zRotation = CGFloat(M_PI)
             addChild(spriteOrPlane)
@@ -141,8 +144,8 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         }
     }
     func replaySceneDidFinish(myScene: ReplayScene, command: String) {
-        myScene.view!.removeFromSuperview()
         if (command=="Restart") {
+            myScene.view!.removeFromSuperview()
             for idx in 0..<sky.count {
                 if idx == skyIndex {
                     sky[idx].numParticlesToEmit = 1  //turn off
@@ -164,10 +167,14 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             missile2!.hidden = true
             missile2!.position = self.plane.position
             isFired2 = false
-            launchedSprites = 0
+            //let missionScore = (100 * aces) + (missileHits * 5) - missilesFired - bulletsFired - lostSprites - planeDamage
+            //aces = 0  do not reset so can be accumulated for leaderBoard
+            missileHits = 0
+            missilesFired = 0
+            bulletsFired = 0
             lostSprites = 0
+            launchedSprites = 0
             planeDamage = 0
-            score = 0
             updateScoreBoard()
             fireButton!.hidden = true
             fireButton2!.hidden = true
@@ -178,11 +185,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             flyBy()
             setAutoStartTimer()
         } else {
-            let delay = Double(2) * Double(NSEC_PER_SEC)
-            let totalTime = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), Int64(delay))
-            dispatch_after(totalTime, dispatch_get_main_queue()) { [weak self] (success) -> Void in
-                self!.goToEndgame()
-            }
+            goToEndgame(myScene, command: command)
         }
     }
     func addSquadron() {
@@ -212,8 +215,8 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
             addChild(sprite)
             spriteNodes.append(sprite)
             launchedSprites++
-            updateScoreBoard()
         }
+        updateScoreBoard()
     }
     func insertionSpotTaken(test: CGPoint, reserved: CGPoint) -> Bool {
         let airSpace = Int(plane.frame.height/5)
@@ -232,7 +235,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         if model.hasPrefix("iPad") {
             replayAdjustment = 4  //was 2
         } else {
-            replayAdjustment = 8
+            replayAdjustment = 6
             scaleFactor = 0.67
         }
         replayView = SKView(frame: CGRect(x: frame.size.width/(replayAdjustment*2), y: frame.size.height/(replayAdjustment*2), width: frame.size.width/replayAdjustment, height: frame.size.height/replayAdjustment))
@@ -454,11 +457,34 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         smoke!.position = enemy.position
         smoke!.numParticlesToEmit = 0  //turn smoke on
         captureBogey(1)
-        aces++      //you Won the level
+        aces++      //you defeated the enemy!
+        enemy.hidden = true
+        enemy.physicsBody!.dynamic = false
+        updateScoreBoard()
         replay()
     }
-    func goToEndgame() {
-        exit(0)
+    func goToEndgame(myScene: ReplayScene, command: String) {
+        if command == "GameCenter" {
+            laser.runAction(sound7)
+            gameCenter(UIButton())
+            let qualityOfServiceClass = QOS_CLASS_USER_INITIATED
+            let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+            dispatch_async(backgroundQueue, { [weak self] in
+                print("This is run on the background queue")
+                while !self!.gameCenterDone {
+                    sleep(1)
+                }
+                dispatch_async(dispatch_get_main_queue(), { [weak self] in
+                    print("This is run on the main queue, after backgroundQueue code in outer closure")
+                    if self!.gameCenterDone {
+                        self!.replaySceneDidFinish(myScene, command: "Restart")
+                        self!.gameCenterDone = false
+                    }
+                    })
+                })
+        } else {
+            exit(0)
+        }
     }
     func planeDidCollideWithEnemy(plane: SKSpriteNode, enemy: SKLabelNode) {
         planeDamage++
@@ -471,8 +497,6 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         }
     }
     func replay() {
-        enemy.hidden = true
-        enemy.physicsBody!.dynamic = false
         let action = SKAction.moveToY(Constants.Top/2, duration: 2)
         enemy.runAction(action, completion: { [weak self] (success) -> Void in
             self!.view!.addSubview(self!.replayView!)
@@ -517,6 +541,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
                             missilesFired++
                         }
                     }
+                    updateScoreBoard()
                     if missilesFired == 16 {  //end of level
                         replay()
                     }
@@ -544,13 +569,17 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         soundOn = false
     }
     func updateScoreBoard() {
-        if planeDamage == 3 {
+        var aceShots = 0
+        if planeDamage == 3 || missilesFired == 16 || lostSprites == 12 || enemy.hidden {
+            if enemy.hidden {
+                aceShots = 1
+            }
             myLabel.fontColor = UIColor.redColor()
-            myLabel.text = "Game Over!  Captured Bogeys: \(score), Sprites Lost: \(lostSprites)"
-            myLabel2.text = "Missile Hits: \(score), Sprites Launched: \(launchedSprites)"
+            myLabel.text = "Game Over!  Captured Bandits: \(missileHits), Aces: \(aceShots)"
+            myLabel2.text = "Missiles Fired: \(missilesFired), Lasers Fired: \(bulletsFired)"
         } else {
-            myLabel.text = "Missile Hits: \(score), Sprites Launched: \(launchedSprites)"
-            myLabel2.text = "Plane damage: \(planeDamage), Sprites Lost: \(lostSprites)"
+            myLabel.text = "Missile Hits: \(missileHits), Plane damage: \(planeDamage)"
+            myLabel2.text = "Lasers Fired: \(bulletsFired), Wingmen Lost: \(lostSprites)"
         }
     }
     // MARK: - UPDATE()
@@ -584,7 +613,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
     func captureBogey(shot: Int) {
         if soundOn {
             runAction(sound2)
-            score++
+            missileHits++
             updateScoreBoard()
             resetMissile()
         }
@@ -613,18 +642,125 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate {
         laser.physicsBody!.collisionBitMask = enemyCategory
         laser.physicsBody!.contactTestBitMask = enemyCategory
     }
+    var bulletsFired = 0
     func fireCannon() {
+        bulletsFired++
+        updateScoreBoard()
         laser.hidden = false
         var laserSequence = [SKAction]()
         laser.position = CGPointMake(plane.position.x, plane.position.y + plane.frame.height/2)
         //print(laser.position)
-        laserSequence.append(sound7)
+        laserSequence.append(sound6)
         let action = SKAction.moveToY(frame.height, duration: 0.5)
         laserSequence.append(action)
+        laserSequence.append(sound7)
         laser.runAction(SKAction.sequence(laserSequence), completion: { [weak self] (success) -> Void in
             self!.laser.hidden = true
             self!.laser.position = CGPoint(x: -10, y: 0)
             })
+    }
+    // MARK: GameCenter
+    var gameCenterAchievements=[String:GKAchievement]() //dictionary...send high score to leaderboard
+    // load prev achievement granted to the player
+    func gameCenterLoadAchievements(){
+        // load all prev. achievements for GameCenter for the user so progress can be added
+        GKAchievement.loadAchievementsWithCompletionHandler( { [weak self] (allAchievements, error) -> Void in
+            if error != nil {
+                print("Game Center: could not load achievements, error: \(error)")
+            } else {
+                for anAchievement in allAchievements!  {
+                    let oneAchievement = anAchievement
+                    self!.gameCenterAchievements[oneAchievement.identifier!]=oneAchievement
+                }
+            }
+            })
+    }
+    // add progress to an achievement
+    func gameCenterAddProgressToAnAchievement(progress:Double, achievementID:String) {
+        let gvc = view!.window!.rootViewController as! GameViewController
+        if gvc.canUseGameCenter == true { // only update progress if user opt-in to use Game Center
+            // lookup if prev progress is logged for this achievement = achievement is already known (and loaded) from Game Center for this user
+            let lookupAchievement:GKAchievement? = gameCenterAchievements[achievementID]
+            if let achievement = lookupAchievement {
+                // found the achievement with the given achievementID, check if it already 100% done
+                if achievement.percentComplete != 100 {
+                    // set new progress
+                    achievement.percentComplete = progress
+                    if progress == 100.0  { achievement.showsCompletionBanner=true }  // show banner only if achievement is fully granted (progress is 100%)
+                    // try to report the progress to the Game Center
+                    GKAchievement.reportAchievements([achievement], withCompletionHandler: { (error) -> Void in
+                        if error != nil {
+                            print("Couldn't save achievement (\(achievementID)) progress to \(progress) %")
+                        }
+                    })
+                }
+                else {// achievemnt already granted, nothing to do
+                    print("DEBUG: Achievement (\(achievementID)) already granted")
+                }
+            } else { // never added  progress for this achievement, create achievement now, recall to add progress
+                print("No achievement with ID (\(achievementID)) was found, no progress for this one was recoreded yet. Create achievement now.")
+                gameCenterAchievements[achievementID] = GKAchievement(identifier: achievementID)
+                // recursive recall this func now that the achievement exist
+                gameCenterAddProgressToAnAchievement(progress, achievementID: achievementID)
+            }
+        }
+    }
+    func saveHighscore(score: Int) {
+        let gvc = view!.window!.rootViewController as! GameViewController
+        //check if user is signed in
+        if gvc.gameCenterPlayer.authenticated {
+            let scoreReporter = GKScore(leaderboardIdentifier: "com.garthmackenzie.SortIt.leaderboard") //leaderboard id here
+            scoreReporter.value = Int64(score)
+            let scoreArray: [GKScore] = [scoreReporter]
+            GKScore.reportScores(scoreArray, withCompletionHandler: { [weak self] (error) -> Void in
+                if error != nil {
+                    print("error posting scoreArray to Game Center")
+                } else {
+                    self!.showLeader()
+                }
+            })
+        }
+    }
+    //shows leaderboard screen
+    func showLeader() {
+        let vc = self.view?.window?.rootViewController
+        let gc = GKGameCenterViewController()
+        gc.gameCenterDelegate = self
+        vc!.presentViewController(gc, animated: true, completion: nil)
+    }
+    var gameCenterDone = false
+    //hides leaderboard screen
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: { [weak self] (success) -> Void in
+            self!.gameCenterDone = true
+            })
+    }
+    @IBAction func gameCenter(sender: UIButton) {  //aces accumulate, max(16)missilesFired, unlimited bullets, max(12+flyBy)lostSprites, max(3)planeDamage per flight
+        let highScore = (100 * aces) + (missileHits * 5) - missilesFired - bulletsFired - lostSprites - planeDamage
+        if highScore > 0 {
+            saveHighscore(highScore)  //showLeader()
+            let gvc = view!.window!.rootViewController as! GameViewController
+            if gvc.canUseGameCenter {
+                gameCenterLoadAchievements()
+                var percent = Double(highScore) / 1000.0
+                print(percent)
+                gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.points.1000")
+                percent = Double(highScore) / 2000.0
+                gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.points.2000")
+                percent = Double(highScore) / 3000.0
+                gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.points.3000")
+                percent = Double(highScore) / 5000.0
+                gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.points.5000")
+                percent = Double(jetIndex) / 25.0
+                gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.level.25")
+                percent = Double(jetIndex) / 50.0
+                gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.level.50")
+                percent = Double(jetIndex) / 75.0
+                gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.level.75")
+                percent = Double(jetIndex) / 100.0
+                gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.level.100")
+            }
+        }
     }
 }
 
@@ -652,52 +788,56 @@ private extension CGVector {
 }
 private extension SKSpriteNode {
     class var random: SKSpriteNode {
-        switch arc4random() % 12 {
-        case 0: return SKSpriteNode(imageNamed:"F-35AZ")
-        case 1: return SKSpriteNode(imageNamed:"F-15Z1")
-        case 2: return SKSpriteNode(imageNamed:"MiG-29MZ")
-        case 3: return SKSpriteNode(imageNamed:"Su-33")
-        case 4: return SKSpriteNode(imageNamed:"F1444842379440")
-        case 5: return SKSpriteNode(imageNamed:"F-104 Starfighter")
-        case 6: return SKSpriteNode(imageNamed:"F-RussianZ1")
-        case 7: return SKSpriteNode(imageNamed:"T-50")
-        case 8: return SKSpriteNode(imageNamed:"F-15")
-        case 9: return SKSpriteNode(imageNamed:"F-35A")
-        case 10: return SKSpriteNode(imageNamed:"MiG-29Z")
-        case 11: return SKSpriteNode(imageNamed:"F-15Z")
-        default: return SKSpriteNode(imageNamed:"F-15Z1")
+        switch arc4random() % 14 {
+            case 0: return SKSpriteNode(imageNamed:"F-35AZ")
+            case 1: return SKSpriteNode(imageNamed:"F-18")
+            case 2: return SKSpriteNode(imageNamed:"F-4")
+            case 3: return SKSpriteNode(imageNamed:"F-15Z1")
+            case 4: return SKSpriteNode(imageNamed:"MiG-29MZ")
+            case 5: return SKSpriteNode(imageNamed:"Su-33")
+            case 6: return SKSpriteNode(imageNamed:"F1444842379440")
+            case 7: return SKSpriteNode(imageNamed:"F-104 Starfighter")
+            case 8: return SKSpriteNode(imageNamed:"F-RussianZ1")
+            case 9: return SKSpriteNode(imageNamed:"T-50")
+            case 10: return SKSpriteNode(imageNamed:"F-15")
+            case 11: return SKSpriteNode(imageNamed:"F-35A")
+            case 12: return SKSpriteNode(imageNamed:"MiG-29Z")
+            case 13: return SKSpriteNode(imageNamed:"F-15Z")
+            default: return SKSpriteNode(imageNamed:"T-50")
         }
     }
     static func next(index: Int) -> SKSpriteNode {
-        switch index % 12 {
-        case 0: return SKSpriteNode(imageNamed:"F-35AZ")
-        case 1: return SKSpriteNode(imageNamed:"F-15Z1")
-        case 2: return SKSpriteNode(imageNamed:"MiG-29MZ")
-        case 3: return SKSpriteNode(imageNamed:"Su-33")
-        case 4: return SKSpriteNode(imageNamed:"F1444842379440")
-        case 5: return SKSpriteNode(imageNamed:"F-104 Starfighter")
-        case 6: return SKSpriteNode(imageNamed:"F-RussianZ1")
-        case 7: return SKSpriteNode(imageNamed:"T-50")
-        case 8: return SKSpriteNode(imageNamed:"F-15")
-        case 9: return SKSpriteNode(imageNamed:"F-35A")
-        case 10: return SKSpriteNode(imageNamed:"MiG-29Z")
-        case 11: return SKSpriteNode(imageNamed:"F-15Z")
-        default: return SKSpriteNode(imageNamed:"F-15Z1")
+        switch index % 14 {
+            case 0: return SKSpriteNode(imageNamed:"F-35AZ")
+            case 1: return SKSpriteNode(imageNamed:"F-18")
+            case 2: return SKSpriteNode(imageNamed:"F-4")
+            case 3: return SKSpriteNode(imageNamed:"F-15Z1")
+            case 4: return SKSpriteNode(imageNamed:"MiG-29MZ")
+            case 5: return SKSpriteNode(imageNamed:"Su-33")
+            case 6: return SKSpriteNode(imageNamed:"F1444842379440")
+            case 7: return SKSpriteNode(imageNamed:"F-104 Starfighter")
+            case 8: return SKSpriteNode(imageNamed:"F-RussianZ1")
+            case 9: return SKSpriteNode(imageNamed:"T-50")
+            case 10: return SKSpriteNode(imageNamed:"F-15")
+            case 11: return SKSpriteNode(imageNamed:"F-35A")
+            case 12: return SKSpriteNode(imageNamed:"MiG-29Z")
+            case 13: return SKSpriteNode(imageNamed:"F-15Z")
+            default: return SKSpriteNode(imageNamed:"T-50")
         }
     }
 }
 private extension UIColor {
     class var random: UIColor {
         switch arc4random() % 8 {
-        case 0: return UIColor.greenColor()
-        case 1: return UIColor.blueColor()
-        case 2: return UIColor.orangeColor()
-        case 3: return UIColor.redColor().colorWithAlphaComponent(0.5)
-        case 4: return UIColor.purpleColor()
-        case 5: return UIColor.yellowColor()
-        case 6: return UIColor.brownColor()
-        case 7: return UIColor.darkGrayColor()
-        default: return UIColor.redColor()
+            case 0: return UIColor.greenColor()
+            case 1: return UIColor.blueColor()
+            case 2: return UIColor.orangeColor()
+            case 3: return UIColor.redColor().colorWithAlphaComponent(0.5)
+            case 4: return UIColor.purpleColor()
+            case 5: return UIColor.yellowColor()
+            case 6: return UIColor.brownColor()
+            case 7: return UIColor.darkGrayColor()
+            default: return UIColor.redColor()
         }
     }
 }

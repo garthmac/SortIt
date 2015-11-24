@@ -1,14 +1,14 @@
 # SortIt (alias RedBlock Top Gun/DangerZone/Strike Eagle/Squadron Leader)
 
 uses SpriteKit
-- automatic play - levels/planes incremented and HighScore aces saved
+- automatic play - missions/14 planes cycled and HighScore aces saved
 - features squadrons of 12 supersonic fighter jets (u r the Squadron Leader)
 
 - add squadron of 12 jets c/w flames, flyBy animations, various emitters for smoke, fire, explosions, skies, 
-resetMissile and replay changes
+resetMissile and replay
 - if Squadron Leader plane goes off screen, just drag towards center
 
-No adverts; In App Purchases; Game Center High Score (number of Aces-gatling cannon hits) plus levels played achievements
+No adverts; In App Purchases; Game Center High Score (number of Aces-gatling cannon hits) plus missions played achievements
 - added optimization randomInRange()
 
 

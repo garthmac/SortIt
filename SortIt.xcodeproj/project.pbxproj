@@ -47,6 +47,8 @@
 		718114CC1C012183006196EF /* laser3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 718114CB1C012183006196EF /* laser3.mp3 */; };
 		718114CE1C012215006196EF /* aircraft0362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 718114CD1C012215006196EF /* aircraft0362.mp3 */; };
 		718114D11C013973006196EF /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7163407B1BF9B11A00D0CC4D /* Fire.sks */; };
+		71D2B59D1C03F2220024F67D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D2B59C1C03F2220024F67D /* GameKit.framework */; };
+		71D2B59F1C03F4CB0024F67D /* gameCenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 71D2B59E1C03F4CB0024F67D /* gameCenter.png */; };
 		71E1BFAA1BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 71E1BFA91BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg */; };
 		71E1BFB11C004E060028BF62 /* laser1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71E1BFB01C004E060028BF62 /* laser1.mp3 */; };
 		71E44B7A1BF66E54000869CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E44B791BF66E54000869CA /* AppDelegate.swift */; };
@@ -121,6 +123,8 @@
 		7170ADB91BF83EC400CC51CA /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Explosion.sks; path = space/Explosion.sks; sourceTree = "<group>"; };
 		718114CB1C012183006196EF /* laser3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser3.mp3; sourceTree = "<group>"; };
 		718114CD1C012215006196EF /* aircraft0362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft0362.mp3; sourceTree = "<group>"; };
+		71D2B59C1C03F2220024F67D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		71D2B59E1C03F4CB0024F67D /* gameCenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameCenter.png; sourceTree = "<group>"; };
 		71E1BFA91BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 18mqkoo90e843jpg.jpg; sourceTree = "<group>"; };
 		71E1BFB01C004E060028BF62 /* laser1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser1.mp3; sourceTree = "<group>"; };
 		71E44B761BF66E54000869CA /* SortIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SortIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71D2B59D1C03F2220024F67D /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +219,7 @@
 		7170ADB71BF83EA000CC51CA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				71D2B59E1C03F4CB0024F67D /* gameCenter.png */,
 				716340811BFAA80100D0CC4D /* iTunesArtwork@2x.png */,
 				71E1BFA91BFFDE7C0028BF62 /* 18mqkoo90e843jpg.jpg */,
 				716340AC1BFC1ADE00D0CC4D /* F-15E_391st_USAF_081215-F-7823A-931.jpg */,
@@ -244,6 +250,7 @@
 		71E44B6D1BF66E54000869CA = {
 			isa = PBXGroup;
 			children = (
+				71D2B59C1C03F2220024F67D /* GameKit.framework */,
 				71E44B781BF66E54000869CA /* SortIt */,
 				7170ADB71BF83EA000CC51CA /* Assets */,
 				71E44B911BF66E54000869CA /* SortItTests */,
@@ -367,6 +374,11 @@
 					71E44B751BF66E54000869CA = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = 7P9362E76E;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					71E44B8D1BF66E54000869CA = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -447,6 +459,7 @@
 				7163407A1BF9B0E600D0CC4D /* Smoke.sks in Resources */,
 				7163409F1BFAA85A00D0CC4D /* Icon-57.png in Resources */,
 				716340A51BFAA85A00D0CC4D /* Icon-98@2x.png in Resources */,
+				71D2B59F1C03F4CB0024F67D /* gameCenter.png in Resources */,
 				716340A31BFAA85A00D0CC4D /* Icon-44@2x.png in Resources */,
 				716340A91BFAA85A00D0CC4D /* Icon-72@2x.png in Resources */,
 				71E1BFB11C004E060028BF62 /* laser1.mp3 in Resources */,
@@ -620,11 +633,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SortIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.garthmackenzie.SortIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -633,11 +648,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SortIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.garthmackenzie.SortIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
