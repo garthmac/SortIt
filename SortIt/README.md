@@ -1,7 +1,7 @@
 # SortIt (alias RedBlock Top Gun/DangerZone/Strike Eagle/Squadron Leader)
 
 uses SpriteKit
-- automatic play - missions/14 planes cycled and HighScore aces saved
+- automatic play - missions/14 planes cycled and HighScore saved on GameCenter
 - features squadrons of 12 supersonic fighter jets (u r the Squadron Leader)
 
 - add squadron of 12 jets c/w flames, flyBy animations, various emitters for smoke, fire, explosions, skies, 

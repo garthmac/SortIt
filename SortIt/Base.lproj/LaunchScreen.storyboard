@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="18mqkoo90e843jpg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jc5-Xz-fdI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F-15E_391st_USAF.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jc5-Xz-fdI">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
@@ -39,6 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="18mqkoo90e843jpg.jpg" width="550" height="367"/>
+        <image name="F-15E_391st_USAF.png" width="1206" height="804"/>
     </resources>
 </document>
