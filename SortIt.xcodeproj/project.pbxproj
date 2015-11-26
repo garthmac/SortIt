@@ -44,7 +44,6 @@
 		716340AB1BFAA85A00D0CC4D /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716340971BFAA85A00D0CC4D /* Icon-76@2x.png */; };
 		7170ADBB1BF83EC400CC51CA /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7170ADB91BF83EC400CC51CA /* Explosion.sks */; };
 		718114CC1C012183006196EF /* laser3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 718114CB1C012183006196EF /* laser3.mp3 */; };
-		718114CE1C012215006196EF /* aircraft0362.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 718114CD1C012215006196EF /* aircraft0362.mp3 */; };
 		718114D11C013973006196EF /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7163407B1BF9B11A00D0CC4D /* Fire.sks */; };
 		71D2B59D1C03F2220024F67D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71D2B59C1C03F2220024F67D /* GameKit.framework */; };
 		71D2B59F1C03F4CB0024F67D /* gameCenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 71D2B59E1C03F4CB0024F67D /* gameCenter.png */; };
@@ -120,7 +119,6 @@
 		716340971BFAA85A00D0CC4D /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
 		7170ADB91BF83EC400CC51CA /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Explosion.sks; path = space/Explosion.sks; sourceTree = "<group>"; };
 		718114CB1C012183006196EF /* laser3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser3.mp3; sourceTree = "<group>"; };
-		718114CD1C012215006196EF /* aircraft0362.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = aircraft0362.mp3; sourceTree = "<group>"; };
 		71D2B59C1C03F2220024F67D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		71D2B59E1C03F4CB0024F67D /* gameCenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameCenter.png; sourceTree = "<group>"; };
 		71E1BFB01C004E060028BF62 /* laser1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser1.mp3; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 				71E44BAD1BF6912E000869CA /* beep10.mp3 */,
 				716340611BF8527F00D0CC4D /* aircraft013.mp3 */,
 				716340631BF8613200D0CC4D /* aircraft036.mp3 */,
-				718114CD1C012215006196EF /* aircraft0362.mp3 */,
 				7163406D1BF9936900D0CC4D /* aircraft064.mp3 */,
 				716340651BF9256F00D0CC4D /* 16.7 Million Particles on an iPad Pro.mp3 */,
 				71E1BFB01C004E060028BF62 /* laser1.mp3 */,
@@ -429,7 +426,6 @@
 				7163409C1BFAA85A00D0CC4D /* Icon-40@2x.png in Resources */,
 				7163405C1BF849C100D0CC4D /* Snow.sks in Resources */,
 				7170ADBB1BF83EC400CC51CA /* Explosion.sks in Resources */,
-				718114CE1C012215006196EF /* aircraft0362.mp3 in Resources */,
 				716340A21BFAA85A00D0CC4D /* Icon-27.5@2x.png in Resources */,
 				7163409B1BFAA85A00D0CC4D /* Icon-Small-40.png in Resources */,
 				716340AA1BFAA85A00D0CC4D /* Icon-76.png in Resources */,

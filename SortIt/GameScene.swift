@@ -510,7 +510,7 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate, GKGameC
             if test % 3 == 0 {  //only pop question/gameCenter button every third flight
                 self!.view!.addSubview(self!.replayView!)
             } else {
-                self!.replaySceneDidFinish(self!.replayScene!, command: "Restart")   //last change*********
+                self!.replaySceneDidFinish(self!.replayScene!, command: "Restart")   //replayScene was a let***************
             }
             self!.isFired = false
             self!.isFired2 = false
@@ -760,22 +760,22 @@ class GameScene: SKScene, ReplaySceneDelegate, SKPhysicsContactDelegate, GKGameC
             let gvc = view!.window!.rootViewController as! GameViewController
             if gvc.canUseGameCenter {
                 gameCenterLoadAchievements()
-                var percent = Double(score) / 1000.0
-                print(percent)
+                var percent = (Double(score) / 10.0)
+                //print(percent)
                 gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.points.1000")
-                percent = Double(score) / 2000.0
+                percent = Double(score) / 20.0
                 gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.points.2000")
-                percent = Double(score) / 3000.0
+                percent = Double(score) / 30.0
                 gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.points.3000")
-                percent = Double(score) / 5000.0
+                percent = Double(score) / 50.0
                 gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.points.5000")
-                percent = Double(jetIndex) / 25.0
+                percent = Double(jetIndex) / 0.25
                 gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.level.25")
-                percent = Double(jetIndex) / 50.0
+                percent = Double(jetIndex) / 0.50
                 gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.level.50")
-                percent = Double(jetIndex) / 75.0
+                percent = Double(jetIndex) / 0.75
                 gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.level.75")
-                percent = Double(jetIndex) / 100.0
+                percent = Double(jetIndex)
                 gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.SortIt.level.100")
             }
         }

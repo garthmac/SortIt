@@ -1,15 +1,20 @@
 # SortIt (alias RedBlock Top Gun/DangerZone/Strike Eagle/Squadron Leader)
 
-uses SpriteKit
-- automatic play - missions/14 planes cycled and HighScore saved on GameCenter
+Strike Eagle (alias Top Gun / DangerZone /  Squadron Leader) by RedBlock Games
+Strike Eagle (New on iTunes Dec 2015) https://redblockblog.wordpress.com/marketing/
+FREE download...for iPhone/iPad/iPod...Enjoy!
+
+Demo link to Vimeo... https://player.vimeo.com/video/143505343?autoplay=1
+
+uses SpriteKit physics engine for realistic in air battles
+- automatic play - 14 US and Soviet military Jet Fighters - Mission Sorties / HighScore saved on GameCenter
 - features squadrons of 12 supersonic fighter jets (u r the Squadron Leader)
 
 - add squadron of 12 jets c/w flames, flyBy animations, various emitters for smoke, fire, explosions, skies, 
 resetMissile and replay
 - if Squadron Leader plane goes off screen, just drag towards center
 
-No adverts; In App Purchases; Game Center High Score (number of Aces-gatling cannon hits) plus missions played achievements
-- added optimization randomInRange()
+No adverts or In App Purchases; Game Center High Score (number of Aces, gatling cannon hits, guided missiles fired, bogeys captured, plane damage, laser shots, wingmen lost) plus missions played achievements
 
 
 Xcode 7.1 
